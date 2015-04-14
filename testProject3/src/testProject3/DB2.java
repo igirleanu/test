@@ -16,6 +16,9 @@ public class DB2 {
 		String pass = "Password!";
 		try{
 
+			
+			
+			//fghjgfhfg
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 			con = java.sql.DriverManager.getConnection(url, id, pass);
 
