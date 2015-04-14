@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="ISO-8859-1">
 <title>Files</title>
+
 </head>
 <body>
- <%@ page import="testProject3.*" %>
-  
 <br>
 <b>Files</b>
 <table>
@@ -26,18 +23,12 @@
 			<label for="male">Download archive</label>
 		</td>			
 	</tr>
-	<%
-	 DB2 a = new DB2();
-	 mFiles files = a.getFiles();
-					
-	for(mFiles file : files){
-	%>		
 	<tr>		
 		<td align="right">
-			<label for="male"><%=file.userId %></label>
+			<label for="male">Author</label>
 		</td>
 		<td align="center">
-			<label for="male"><%=file.fileName %></label>
+			<label for="male">File Name</label>
 		</td>
 		<td align="center">
 			<input type="submit" style="width: 60px; " value="Original">
@@ -46,9 +37,7 @@
 			<input type="submit" style="width: 60px; " value="ZIP">
 		</td>			
 	</tr>
-	<%
-	}
-	%>
+ 
 </table>
 <br>
 <b>Load your file</b>

@@ -1,11 +1,13 @@
 package testProject3;
+import java.util.*; 
 
 public class DB2 {
-	public java.sql.Connection con;
-	public java.sql.Statement s;
-	public java.sql.ResultSet rs;
-	public java.sql.PreparedStatement pst;
-
+	private java.sql.Connection con;
+	private java.sql.Statement s;
+	private java.sql.ResultSet rs;
+	private java.sql.PreparedStatement pst;
+	private List<mFile> files = new ArrayList<mFile>();
+	
 	public DB2(){
 		con=null;
 		s=null;
@@ -15,10 +17,6 @@ public class DB2 {
 		String id= "sa";
 		String pass = "Password!";
 		try{
-
-			
-			
-			//fghjgfhfg
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 			con = java.sql.DriverManager.getConnection(url, id, pass);
 
@@ -61,24 +59,21 @@ public class DB2 {
 	}
 	
 	
-	public String getFiles(){
-		String outText = "";
-	
+	public List<mFile> getFiles(){
+		
 		String sql = "select * from files";
 		try{
 		s = con.createStatement();
 		rs = s.executeQuery(sql);
-		outText = outText + "<table>";
-		while( rs.next() ){
-			outText = outText + "<tr>";
-			outText = outText + "<td>" + rs.getString("id")   + "</td>";
-			outText = outText + "<td>" + rs.getString("nume") + "</td>";
-			outText = outText + "<td>" + rs.getString("password") + "</td>";
-			outText = outText + "</tr>";
-
-		}
-		outText = outText + "</table>";
-
+		
+			while( rs.next() ){
+				mFile file = new mFile(); 
+				file.id = Integer.parseInt(rs.getString("id"));
+				file.userId = Integer.parseInt(rs.getString("user_id"));
+				file.fileName = rs.getString("name");
+				file.fileBody = rs.getString("body");
+				files.add(file);
+			}			
 		}
 		catch(Exception e){e.printStackTrace();}
 		finally{
@@ -88,18 +83,9 @@ public class DB2 {
 				if(con!=null) con.close();
 			}catch(Exception e){}
 		}
-
-		return outText;
-
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+		return files;
+	}	
 }
+
 
 
